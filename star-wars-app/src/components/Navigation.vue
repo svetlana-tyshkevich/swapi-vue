@@ -5,8 +5,10 @@
       <div>loading</div>
     </div>
     <div v-else>
-      <ul >
-        <li v-for="film in films" :key="film.id" class="nav-film">{{ film.properties.title }}</li>
+      <ul>
+        <li v-for="film in films" :key="film.id" class="nav-film">
+          {{ film.properties.title }}
+        </li>
       </ul>
     </div>
   </div>
@@ -31,7 +33,6 @@ export default {
         })
         .catch((e) => console.log(e));
     };
-    console.log(films);
     return { films, loading };
   },
 };
@@ -39,6 +40,8 @@ export default {
 
 <style scoped>
 .container {
+  width: 30%;
+  min-width: 200px;
   background-color: #000;
   padding: 20px 0;
   border-radius: 8px;
