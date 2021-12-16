@@ -6,7 +6,12 @@
     </div>
     <div v-else>
       <ul>
-        <li v-for="film in films" :key="film.id" class="nav-film">
+        <li
+          v-for="film in films"
+          :key="film.id"
+          @click="onClick(film.properties.url)"
+          class="nav-film"
+        >
           {{ film.properties.title }}
         </li>
       </ul>
@@ -16,12 +21,18 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import DataService from '../services/DataService.jsx';
+import DataService from '../services/DataService.js';
 
 let films = ref(true);
 let loading = ref({});
 
 export default {
+  name: 'Navigation',
+  methods: {
+    onClick(url) {
+      this.$store.commit('setSelectedFilm', url);
+    },
+  },
   setup() {
     onMounted(() => getFilms());
 
@@ -53,11 +64,11 @@ ul {
 }
 
 li {
-    padding: 10px;
-    margin: 0;
+  padding: 10px;
+  margin: 0;
 }
 
 li:hover {
-    background-color: #1b1b1b;
+  background-color: #1b1b1b;
 }
 </style>

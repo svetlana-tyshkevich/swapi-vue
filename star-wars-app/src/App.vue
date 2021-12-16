@@ -2,21 +2,29 @@
   <div id="container">
     <Navigation />
 
-  <div id="main">
-    <Content page="1" />
-  </div>
+    <div id="main">
+       <Content :selected-film='getSelectedFilm' :key='getSelectedFilm' />
+     
+    </div>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation.vue';
-import Content from './components/Content.vue'
+import Content from './components/Content.vue';
 
 export default {
   name: 'App',
   components: {
     Navigation,
-    Content
+    Content,
+  },
+  computed: {
+      getSelectedFilm () {
+         const selectedFilm = this.$store.getters.getSelectedFilm;
+         console.log( selectedFilm)
+         return selectedFilm
+      }
   },
 };
 </script>

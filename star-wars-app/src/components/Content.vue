@@ -35,22 +35,20 @@
 </template>
 
 <script>
-import DataService from '../services/DataService.jsx';
+import DataService from '../services/DataService.js';
 import { onMounted, ref } from 'vue';
 
 let film = ref(true);
 let loading = ref({});
-
 export default {
   name: 'Content',
-  props: { page: String },
+  props: { selectedFilm: String },
 
   setup(props) {
-    onMounted(() => getFilm(props.page));
+    onMounted(() => getFilm(props.selectedFilm));
 
-    const getFilm = (page) => {
-      console.log(page);
-      DataService.getFilm(page)
+    const getFilm = (url) => {
+      DataService.getByUrl(url)
         .then((res) => {
           film.value = res.data.result.properties;
           loading.value = false;
@@ -64,18 +62,18 @@ export default {
 
 <style scoped>
 #container {
-    text-align: left;
+  text-align: left;
 }
 ul {
-    list-style: none;
-padding: 20px 30px;
+  list-style: none;
+  padding: 20px 30px;
 }
 li {
-    margin: 10px;
-    padding: 5px;
+  margin: 10px;
+  padding: 5px;
 }
 span:nth-child(1) {
-    color:#5a93e9;
-    font-weight: 700;
+  color: #5a93e9;
+  font-weight: 700;
 }
 </style>
