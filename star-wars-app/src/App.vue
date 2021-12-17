@@ -3,28 +3,39 @@
     <Navigation />
 
     <div id="main">
-       <Content :selected-film='getSelectedFilm' :key='getSelectedFilm' />
-     
+      <Search />
+      <!-- <Content :selected-film="getSelectedFilm" :key="getSelectedFilm" /> -->
+      <SearchResult />
     </div>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation.vue';
-import Content from './components/Content.vue';
+// import Content from './components/Content.vue';
+import Search from './components/Search.vue';
+import SearchResult from './components/SearchResult.vue';
 
 export default {
   name: 'App',
   components: {
     Navigation,
-    Content,
+    // Content,
+    Search,
+    SearchResult,
   },
   computed: {
-      getSelectedFilm () {
-         const selectedFilm = this.$store.getters.getSelectedFilm;
-         console.log( selectedFilm)
-         return selectedFilm
-      }
+    getSelectedFilm() {
+      const selectedFilm = this.$store.getters.getSelectedFilm;
+      console.log(selectedFilm);
+      return selectedFilm;
+    },
+  },
+  beforeMount() {
+    this.$store.dispatch('getPersons');
+    this.$store.dispatch('getFilms');
+    this.$store.dispatch('getStarships');
+    this.$store.dispatch('getPlanets');
   },
 };
 </script>
@@ -41,6 +52,10 @@ body {
   color: #fff;
   margin-top: 60px;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
 
 #container {
   width: 100%;
@@ -53,7 +68,9 @@ body {
   background: #000;
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 30px 20px;
 }
 </style>

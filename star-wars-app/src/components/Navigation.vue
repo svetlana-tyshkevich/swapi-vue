@@ -9,7 +9,7 @@
         <li
           v-for="film in films"
           :key="film.id"
-          @click="onClick(film.properties.url)"
+          @click="changeFilm(film)"
           class="nav-film"
         >
           {{ film.properties.title }}
@@ -29,9 +29,9 @@ let loading = ref({});
 export default {
   name: 'Navigation',
   methods: {
-    onClick(url) {
-      this.$store.commit('setSelectedFilm', url);
-    },
+    changeFilm(film) {
+      this.$store.commit('setSelectedFilm', film.properties.url);
+    }
   },
   setup() {
     onMounted(() => getFilms());
@@ -70,5 +70,6 @@ li {
 
 li:hover {
   background-color: #1b1b1b;
+  cursor: pointer;
 }
 </style>
