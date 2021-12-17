@@ -3,7 +3,7 @@
     <ul>
       <li v-for="entity in entities" :key="entity.id">
         {{
-          entity.name && entity.name.search(getSearchText) > -1
+          entity.name && entity.name.toLowerCase().search(getSearchText) > -1
             ? entity.name
             : ''
         }}
@@ -23,7 +23,7 @@ export default {
  
   computed: {
     getSearchText() {
-      const searchText = this.$store.getters.getInputText;
+      const searchText = this.$store.getters.getInputText.toLowerCase();
        console.log(searchText);
       return searchText;
     },

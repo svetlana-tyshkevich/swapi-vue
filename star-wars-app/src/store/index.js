@@ -31,17 +31,6 @@ export const store = createStore({
       return state.entities;
     },
 
-    getFilteredEntities(state) {
-      const searchText = state.searchText;
-      const filteredEntities = state.entities.filter((item) => {
-        (item['properties']['title'] &&
-          item['properties']['title'].search(searchText) > -1) ||
-          (item['name'] && item.name.search(searchText) > -1);
-      });
-      console.log(filteredEntities);
-      return filteredEntities;
-    },
-
     getInputText(state) {
       return state.inputText;
     },
