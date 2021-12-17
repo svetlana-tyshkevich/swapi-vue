@@ -58,11 +58,16 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: #000;
 }
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -78,17 +83,22 @@ ul, li {
 #container {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 #main {
   width: 65%;
+  min-width: 400px;
+  min-height: 400px;
   background: #333;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 30px 20px;
+  padding: 30px 50px;  
+  margin: 10px;
 }
 </style>

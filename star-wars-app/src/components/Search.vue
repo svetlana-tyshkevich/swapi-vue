@@ -32,3 +32,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#search-field {
+  margin: 20px;
+  width: 300px;
+  height: 36px;
+  font-size: 17px;
+}
+
+#search-field:focus {
+  outline-color: #c5d9ec;
+}
+</style>
