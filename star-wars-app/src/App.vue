@@ -4,15 +4,19 @@
 
     <div id="main">
       <Search />
-      <!-- <Content :selected-film="getSelectedFilm" :key="getSelectedFilm" /> -->
-      <SearchResult />
+      <div v-if="getContentView==='film' ">
+        <Content :selected-film="getSelectedFilm" :key="getSelectedFilm" />
+      </div>
+      <div v-else-if="getContentView==='search' ">
+        <SearchResult />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation.vue';
-// import Content from './components/Content.vue';
+import Content from './components/Content.vue';
 import Search from './components/Search.vue';
 import SearchResult from './components/SearchResult.vue';
 
@@ -20,18 +24,28 @@ export default {
   name: 'App',
   components: {
     Navigation,
-    // Content,
+    Content,
     Search,
     SearchResult,
   },
+  
   computed: {
     getSelectedFilm() {
       const selectedFilm = this.$store.getters.getSelectedFilm;
-      console.log(selectedFilm);
       return selectedFilm;
     },
+    
+    getContentView() {
+      const contentView = this.$store.getters.getContentView;
+      return contentView;
+    },
+
+    searchText() {
+      const searchText = this.$store.getters.getInputText;
+      return searchText;
+    },
   },
-  beforeMount() {
+  beforeCreate() {
     this.$store.dispatch('getPersons');
     this.$store.dispatch('getFilms');
     this.$store.dispatch('getStarships');

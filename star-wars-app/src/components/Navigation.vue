@@ -20,32 +20,24 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import DataService from '../services/DataService.js';
-
-let films = ref(true);
-let loading = ref({});
-
 export default {
   name: 'Navigation',
   methods: {
     changeFilm(film) {
-      this.$store.commit('setSelectedFilm', film.properties.url);
+      this.$store.dispatch('setSelectedFilm', film);
+      this.$store.dispatch('setContentView', 'film');
+    },
+  },
+  computed: {
+    loading() {
+      const loading = this.$store.getters.getLoading;
+      return loading;
+    },
+    films() {
+      const films = this.$store.getters.getNavigationList;
+      return films;
     }
-  },
-  setup() {
-    onMounted(() => getFilms());
-
-    const getFilms = () => {
-      DataService.getAllFilms()
-        .then((res) => {
-          films.value = res.data.result;
-          loading.value = false;
-        })
-        .catch((e) => console.log(e));
-    };
-    return { films, loading };
-  },
+  }
 };
 </script>
 

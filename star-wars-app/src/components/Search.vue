@@ -23,6 +23,11 @@ export default {
   methods: {
     changeInputValue() {
       this.$store.dispatch('setInputText', this.inputValue.trim());
+      if (this.inputValue.trim() === '') {
+          this.$store.dispatch('setContentView', 'none');
+      } else {
+           this.$store.dispatch('setContentView', 'search');
+      }
     },
   },
 };

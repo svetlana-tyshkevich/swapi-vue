@@ -1,33 +1,46 @@
 import { createStore } from 'vuex';
 import DataService from '../services/DataService.js';
 
-
 export const store = createStore({
   state: {
     entities: [],
-    selectedFilm: 'https://www.swapi.tech/api/films/1',
+    contentView: 'none',
+    navigationList: [],
+    selectedFilm: '',
     inputText: '',
+    loading: true,
   },
   getters: {
+    getContentView(state) {
+      return state.contentView;
+    },
+
+    getLoading(state) {
+      return state.loading;
+    },
+
+    getNavigationList(state) {
+      return state.navigationList;
+    },
+
     getSelectedFilm(state) {
       return state.selectedFilm;
     },
 
     getEntities(state) {
-        const ent = state.entities
-        console.log(ent[0] );
+      const ent = state.entities;
+      console.log(ent[0]);
       return state.entities;
     },
 
     getFilteredEntities(state) {
-        const searchText = state.searchText
-        const filteredEntities = state.entities.filter(item => {
-         item['properties']['title'] && item['properties']['title'].search(searchText) > -1 ||
-         item['name'] 
-         && item.name.search(searchText) > -1
-      }
-      )
-      console.log(filteredEntities)
+      const searchText = state.searchText;
+      const filteredEntities = state.entities.filter((item) => {
+        (item['properties']['title'] &&
+          item['properties']['title'].search(searchText) > -1) ||
+          (item['name'] && item.name.search(searchText) > -1);
+      });
+      console.log(filteredEntities);
       return filteredEntities;
     },
 
@@ -36,6 +49,18 @@ export const store = createStore({
     },
   },
   mutations: {
+    setContentView(state, view) {
+      state.contentView = view;
+    },
+
+    setLoading(state, payload) {
+      state.loading = payload;
+    },
+
+    setNavigationList(state, payload) {
+      state.navigationList = payload;
+    },
+
     setSelectedFilm(state, payload) {
       state.selectedFilm = payload;
     },
@@ -50,6 +75,14 @@ export const store = createStore({
   },
 
   actions: {
+    setContentView(context, view) {
+      context.commit('setContentView', view);
+    },
+
+    setLoading(context, payload) {
+      context.commit('setLoading', payload);
+    },
+
     getPersons(context) {
       DataService.getAllPersons()
         .then((res) => {
@@ -62,6 +95,8 @@ export const store = createStore({
       DataService.getAllFilms()
         .then((res) => {
           context.commit('setEntities', res.data.result);
+          context.commit('setNavigationList', res.data.result);
+          context.commit('setLoading', false);
         })
         .catch((e) => console.log(e));
     },
@@ -80,6 +115,10 @@ export const store = createStore({
           context.commit('setEntities', res.data.results);
         })
         .catch((e) => console.log(e));
+    },
+
+    setSelectedFilm(context, film) {
+      context.commit('setSelectedFilm', film.properties.url);
     },
 
     setInputText(context, payload) {

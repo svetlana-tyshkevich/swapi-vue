@@ -2,7 +2,11 @@
   <div>
     <ul>
       <li v-for="entity in entities" :key="entity.id">
-        {{ entity.name && entity.name.search(getSearchext) > -1 ? entity.name : "" }}
+        {{
+          entity.name && entity.name.search(getSearchText) > -1
+            ? entity.name
+            : ''
+        }}
       </li>
     </ul>
   </div>
@@ -16,11 +20,13 @@ export default {
       entities: this.$store.getters.getEntities,
     };
   },
+ 
   computed: {
-      getSearchext() {
-          const searchText = this.$store.getters.getInputText;
+    getSearchText() {
+      const searchText = this.$store.getters.getInputText;
+       console.log(searchText);
       return searchText;
-      }
-  }
+    },
+  },
 };
 </script>
