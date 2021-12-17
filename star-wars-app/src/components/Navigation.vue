@@ -60,7 +60,7 @@ ul {
 }
 
 li {
-  padding: 10px;
+  padding: 12px;
   margin: 0;
   font-size: 17px;
 }
