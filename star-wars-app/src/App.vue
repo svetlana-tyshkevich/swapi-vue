@@ -4,10 +4,11 @@
 
     <div id="main">
       <Search />
-      <div v-if="getContentView==='film' ">
-        <Content :selected-film="getSelectedFilm" :key="getSelectedFilm" />
+      <div v-if="getContentView === 'film'">
+        <Content />
+        <Links />
       </div>
-      <div v-else-if="getContentView==='search' ">
+      <div v-else-if="getContentView === 'search'">
         <SearchResult />
       </div>
     </div>
@@ -19,6 +20,7 @@ import Navigation from './components/Navigation.vue';
 import Content from './components/Content.vue';
 import Search from './components/Search.vue';
 import SearchResult from './components/SearchResult.vue';
+import Links from './components/Links.vue';
 
 export default {
   name: 'App',
@@ -27,14 +29,15 @@ export default {
     Content,
     Search,
     SearchResult,
+    Links,
   },
-  
+
   computed: {
     getSelectedFilm() {
       const selectedFilm = this.$store.getters.getSelectedFilm;
       return selectedFilm;
     },
-    
+
     getContentView() {
       const contentView = this.$store.getters.getContentView;
       return contentView;
@@ -56,7 +59,7 @@ export default {
 
 <style>
 body {
-  background-color: #444;
+  background-color: #000;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -66,24 +69,25 @@ body {
   color: #fff;
   margin-top: 60px;
 }
-ul {
+ul, li {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 #main {
   width: 65%;
-  background: #000;
+  background: #333;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 30px 20px;
 }

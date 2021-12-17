@@ -35,28 +35,20 @@
 </template>
 
 <script>
-import DataService from '../services/DataService.js';
-import { onMounted, ref } from 'vue';
 
-let film = ref(true);
-let loading = ref({});
 export default {
   name: 'Content',
-  props: { selectedFilm: String },
-
-  setup(props) {
-    onMounted(() => getFilm(props.selectedFilm));
-
-    const getFilm = (url) => {
-      DataService.getByUrl(url)
-        .then((res) => {
-          film.value = res.data.result.properties;
-          loading.value = false;
-        })
-        .catch((e) => console.log(e));
-    };
-    return { film, loading };
-  },
+  computed: {
+    loading() {
+      const loading = this.$store.getters.getLoading;
+      return loading;
+    },
+    film() {
+      const film = this.$store.getters.getSelectedFilm;
+      return film.properties;
+    }
+  }
+ 
 };
 </script>
 

@@ -16,15 +16,15 @@ class DataService {
   };
 
   getAllPlanets = () => {
-    return axios.get(`${URL}/planets/`);
+    return axios.get(`${URL}/planets?page=1&limit=60`);
   };
 
   getAllStarships = () => {
-    return axios.get(`${URL}/starships/`);
+    return axios.get(`${URL}/starships?page=1&limit=36`);
   };
 
   getAllPersons = () => {
-    return axios.get(`${URL}/people/`);
+    return axios.get(`${URL}/people?page=1&limit=82`);
   };
 }
 

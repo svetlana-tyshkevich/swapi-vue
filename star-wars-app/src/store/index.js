@@ -28,8 +28,6 @@ export const store = createStore({
     },
 
     getEntities(state) {
-      const ent = state.entities;
-      console.log(ent[0]);
       return state.entities;
     },
 
@@ -118,7 +116,7 @@ export const store = createStore({
     },
 
     setSelectedFilm(context, film) {
-      context.commit('setSelectedFilm', film.properties.url);
+      context.commit('setSelectedFilm', film);
     },
 
     setInputText(context, payload) {

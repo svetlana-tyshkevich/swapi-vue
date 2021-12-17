@@ -43,9 +43,9 @@ export default {
 
 <style scoped>
 .container {
-  width: 30%;
+  width: 27%;
   min-width: 200px;
-  background-color: #000;
+  background-color: #333;
   padding: 20px 0;
   border-radius: 8px;
 }
