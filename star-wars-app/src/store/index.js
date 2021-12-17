@@ -31,6 +31,10 @@ export const store = createStore({
       return state.entities;
     },
 
+    getFilteredEntities(state) {
+      return state.entities.filter(ent => ent.name && ent.name.toLowerCase().search(state.inputText) > -1)
+    },
+
     getInputText(state) {
       return state.inputText;
     },

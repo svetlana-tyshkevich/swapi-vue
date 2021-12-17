@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <div v-if="loading">
-      <div>loading</div>
+      <div class="loading"><img src="../assets/r2d2_icon.png" alt="loading"></div>
     </div>
     <div v-else>
       <ul>
@@ -67,5 +67,26 @@ li {
 span:nth-child(1) {
   color: #5a93e9;
   font-weight: 700;
+  font-size: 17px;
+}
+.loading {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+img {
+  animation: 4s infinite linear rotation;
+}
+
+@keyframes rotation {
+    0% {
+        transform:rotate(0deg);
+    }
+    100% {
+        transform:rotate(360deg);
+    }
 }
 </style>
